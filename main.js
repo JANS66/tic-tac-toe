@@ -48,7 +48,7 @@ const GameController = (() => {
     let currentPlayer;
     let gameOver = false;
 
-    const startGame = (name1 = "Player 1", name2 = "Player 2") => {
+    const startGame = (name1, name2) => {
         player1 = Player(name1, "X");
         player2 = Player(name2, "O");
         currentPlayer = player1;
@@ -83,6 +83,7 @@ const GameController = (() => {
 
 const DisplayController = (() => {
     const boardContainer = document.getElementById("gameboard");
+    const resultDiv = document.getElementById("result");
 
     const render = () => {
         boardContainer.innerHTML = "";
@@ -103,11 +104,27 @@ const DisplayController = (() => {
         const index = parseInt(e.target.dataset.index);
         const result = GameController.playRound(index);
         render();
-        if (result) alert(result);
-    }
+        if (result) {
+            resultDiv.textContent = result;
+        } else {
+            resultDiv.textContent = `${GameController.getCurrentPlayer().name}'s turn`;
+        }
+    };
 
-    return { render };
+    const clearResult = () => {
+        resultDiv.textContent = "";
+    };
+
+    return { render, handleClick, clearResult };
 })();
 
-GameController.startGame("Alice", "Bob");
-DisplayController.render();
+const startButton = document.getElementById("start-btn");
+startButton.addEventListener("click", () => {
+    const player1Name = document.getElementById("player1-name").value || "Player 1";
+    const player2Name = document.getElementById("player2-name").value || "Player 2";
+
+    GameController.startGame(player1Name, player2Name);
+    DisplayController.render();
+    DisplayController.clearResult();
+    document.getElementById("result").textContent = `${GameController.getCurrentPlayer().name}'s turn`;
+})
