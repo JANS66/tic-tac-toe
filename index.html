@@ -4,22 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <meta name="description"
+        content="Play Tic-Tac-Toe online against a friend. Enter player names and enjoy a responsive, dark-themed game.">
+    <title>Tic-Tac-Toe Game</title>
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
 </head>
 
 <body>
-    <h1>Tic-Tac-Toe</h1>
+    <main class="container">
+        <header>
+            <h1>Tic-Tac-Toe</h1>
+            <p class="instructions">Enter player names and click "Start" to play!</p>
+        </header>
 
-    <div class="controls">
-        <input type="text" id="player1-name" placeholder="Player 1 Name">
-        <input type="text" id="player2-name" placeholder="Player 2 Name">
-        <button id="start-btn">Start / Restart Game</button>
-    </div>
+        <section class="controls">
+            <label for="player1-name">Player 1:</label>
+            <input type="text" id="player1-name" placeholder="Player 1 Name" aria-label="Player 1 Name">
 
-    <div id="gameboard" class="board"></div>
-    <div id="result" class="result"></div>
+            <label for="player2-name">Player 2:</label>
+            <input type="text" id="player2-name" placeholder="Player 2 Name" aria-label="Player 2 Name">
+
+            <button id="start-btn" aria-label="Start or Restart Game">Start / Restart Game</button>
+        </section>
+
+        <section id="gameboard" class="board" aria-label="Tic-Tac-Toe Board"></section>
+        <div id="result" class="result" role="status" aria-live="polite"></div>
+    </main>
 </body>
 
 </html>

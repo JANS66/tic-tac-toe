@@ -1,58 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+
+.container {
+    max-width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
 }
 
-h1 {
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.instructions {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
+    max-width: 400px;
+}
+
+.controls label {
+    flex-basis: 100%;
+    font-size: 0.9rem;
+}
+
+.controls input {
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #1f1f1f;
+    color: #f0f0f0;
+    width: 100%;
+}
+
+.controls input:focus {
+    outline: 2px solid #bb86fc;
+}
+
+.controls button {
+    padding: 8px 15px;
+    font-size: 1rem;
+    background-color: #bb86fc;
+    color: #121212;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.controls button:hover,
+.controls button:focus {
+    background-color: #9b63e3;
+    outline: none;
 }
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 100px;
     gap: 5px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .cell {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f2f2f2;
+    background-color: #1f1f1f;
     border: 2px solid #333;
     font-size: 2rem;
     cursor: pointer;
+    transition: background-color 0.2s ease;
     /* Prevent text from being selected when clicking or dragging on the element */
     user-select: none;
 }
 
-.cell:hover {
-    background-color: #ddd;
-}
-
-.controls {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.controls input {
-    padding: 5px;
-    font-size: 1rem;
-    width: 150px;
-}
-
-.controls button {
-    padding: 5px 10px;
-    font-size: 1rem;
-    cursor: pointer;
+.cell:hover,
+.cell:focus {
+    background-color: #333;
+    outline: 2px solid #bb86fc;
 }
 
 .result {
-    margin-top: 20px;
-    font-size: 1rem;
-    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+    text-align: center;
+    color: #bb86fc;
+}
+
+@media (max-width: 480px) {
+    .board {
+        grid-auto-rows: 80px;
+    }
+
+    .cell {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .board {
+        grid-auto-rows: 120px;
+    }
+
+    .cell {
+        font-size: 2.5rem;
+    }
 }
