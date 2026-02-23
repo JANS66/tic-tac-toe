@@ -94,17 +94,20 @@ const DisplayController = (() => {
             // so it can be retrieved later when the cell is clicked
             cellDiv.dataset.index = index;
             cellDiv.textContent = cell;
+            cellDiv.addEventListener("click", handleClick);
             boardContainer.appendChild(cellDiv);
         });
     };
 
-    const fillTestBoard = () => {
-        const testMarkers = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
-        testMarkers.forEach((marker, i) => Gameboard.setCell(i, marker));
+    const handleClick = (e) => {
+        const index = parseInt(e.target.dataset.index);
+        const result = GameController.playRound(index);
         render();
-    };
+        if (result) alert(result);
+    }
 
-    return { render, fillTestBoard };
+    return { render };
 })();
 
-DisplayController.fillTestBoard();
+GameController.startGame("Alice", "Bob");
+DisplayController.render();
