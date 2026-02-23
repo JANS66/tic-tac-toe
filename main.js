@@ -81,28 +81,30 @@ const GameController = (() => {
     return { startGame, playRound, getCurrentPlayer, getBoard };
 })();
 
-GameController.startGame("Alice", "Bob");
+const DisplayController = (() => {
+    const boardContainer = document.getElementById("gameboard");
 
-function simulateMove(index) {
-    const result = GameController.playRound(index);
-    console.log("Board:", GameController.getBoard());
-    console.log("Next player:", GameController.getCurrentPlayer().name);
-    if (result) console.log(result);
-}
+    const render = () => {
+        boardContainer.innerHTML = "";
+        const board = Gameboard.getBoard();
+        board.forEach((cell, index) => {
+            const cellDiv = document.createElement("div");
+            cellDiv.classList.add("cell");
+            // Store the cell's index as a data attribute (data-index)
+            // so it can be retrieved later when the cell is clicked
+            cellDiv.dataset.index = index;
+            cellDiv.textContent = cell;
+            boardContainer.appendChild(cellDiv);
+        });
+    };
 
-simulateMove(0);
-simulateMove(1);
-simulateMove(4);
-simulateMove(2);
-simulateMove(8);
+    const fillTestBoard = () => {
+        const testMarkers = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
+        testMarkers.forEach((marker, i) => Gameboard.setCell(i, marker));
+        render();
+    };
 
-GameController.startGame("Player1", "Player2");
-simulateMove(0);
-simulateMove(1);
-simulateMove(2);
-simulateMove(4);
-simulateMove(3);
-simulateMove(5);
-simulateMove(7);
-simulateMove(6);
-simulateMove(8);
+    return { render, fillTestBoard };
+})();
+
+DisplayController.fillTestBoard();
